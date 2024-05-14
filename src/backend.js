@@ -42,7 +42,7 @@ const bikesStolenPastWeek = async (stolenLocation = null) => {
     );
   });
 
-  console.log(filteredData);
+  return filteredData;
 };
 
-bikesStolenPastWeek();
+window.onload = bikesStolenPastWeek;
