@@ -20,8 +20,12 @@ const fetchStolenBikes = async () => {
   }
 };
 
-const bikesStolenPastWeek = async () => {
+const bikesStolenPastWeek = async (stolenLocation = null) => {
   const stolenBikes = await fetchStolenBikes();
+
+  if (!stolenLocation) {
+    stolenLocation = '';
+  }
 
   const currentDate = new Date();
   const lastWeekDate = new Date(
@@ -29,9 +33,13 @@ const bikesStolenPastWeek = async () => {
   );
 
   const filteredData = stolenBikes['bikes'].filter((bike) => {
-    const stolenDate = new Date(bike.date_stolen * 1000);
+    const stolenDate = new Date(bike['date_stolen'] * 1000);
 
-    return stolenDate >= lastWeekDate && stolenDate <= currentDate;
+    return (
+      stolenDate >= lastWeekDate &&
+      stolenDate <= currentDate &&
+      bike['stolen_location'].includes(stolenLocation)
+    );
   });
 
   console.log(filteredData);
