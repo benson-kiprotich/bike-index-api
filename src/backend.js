@@ -1,4 +1,4 @@
-const fetchStolenBikes = async () => {
+export const fetchStolenBikes = async () => {
   try {
     const url = 'https://bikeindex.org/api/v3/search';
     const headers = { 'Content-Type': 'application/json' };
@@ -8,19 +8,15 @@ const fetchStolenBikes = async () => {
     const body = await response.json();
 
     if (status == 200) {
-      console.log('Success');
       return body;
-    } else {
-      console.log('Error');
     }
-
     return { status: false };
   } catch (error) {
-    console.error(error);
+    return error.message;
   }
 };
 
-const bikesStolenPastWeek = async (stolenLocation = null) => {
+export const bikesStolenPastWeek = async (stolenLocation = null) => {
   const stolenBikes = await fetchStolenBikes();
 
   if (!stolenLocation) {
@@ -45,4 +41,4 @@ const bikesStolenPastWeek = async (stolenLocation = null) => {
   return filteredData;
 };
 
-window.onload = bikesStolenPastWeek;
+// window.onload = bikesStolenPastWeek;
