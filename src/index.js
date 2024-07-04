@@ -7,6 +7,8 @@ import { bikesStolenPastWeek } from './backend.js';
 $(function () {
   $('#searchForm').on('submit', function (event) {
     event.preventDefault();
+    const searchLocation = $('#searchInput').val();
+    populateTable(searchLocation);
   });
 });
 
