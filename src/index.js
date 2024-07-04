@@ -4,6 +4,12 @@ import $ from 'jquery';
 
 import { bikesStolenPastWeek } from './backend.js';
 
+$(function () {
+  $('#searchForm').on('submit', function (event) {
+    event.preventDefault();
+  });
+});
+
 async function populateTable() {
   const data = await bikesStolenPastWeek();
   // eslint-disable-next-line
