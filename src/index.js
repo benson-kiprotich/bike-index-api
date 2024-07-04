@@ -9,7 +9,7 @@ async function populateTable() {
   // eslint-disable-next-line
   console.log('filtered data', data);
   const tableBody = $('#dataTable > tbody');
-  // tableBody.empty(); // Clear previous data
+  // tableBody.remove(); // Clear previous data
 
   data.forEach(function (record) {
     let row = `<tr>
