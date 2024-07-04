@@ -14,10 +14,9 @@ $(function () {
 
 async function populateTable() {
   const data = await bikesStolenPastWeek();
-  // eslint-disable-next-line
-  console.log('filtered data', data);
+
   const tableBody = $('#dataTable > tbody');
-  // tableBody.remove(); // Clear previous data
+  tableBody.html(''); // Clear previous data
 
   data.forEach(function (record) {
     let row = `<tr>
