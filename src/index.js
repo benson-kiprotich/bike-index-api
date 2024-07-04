@@ -4,19 +4,12 @@ import $ from 'jquery';
 
 import { bikesStolenPastWeek } from './backend.js';
 
-$(function () {
-  $('#searchForm').on('submit', function (event) {
-    event.preventDefault();
-    const searchLocation = $('#searchInput').val();
-    populateTable(searchLocation);
-  });
-});
-
-async function populateTable(searchSpec = null) {
-  const data = await bikesStolenPastWeek(searchSpec);
-
+async function populateTable() {
+  const data = await bikesStolenPastWeek();
+  // eslint-disable-next-line
+  console.log('filtered data', data);
   const tableBody = $('#dataTable > tbody');
-  tableBody.html(''); // Clear previous data
+  // tableBody.empty(); // Clear previous data
 
   data.forEach(function (record) {
     let row = `<tr>
