@@ -12,8 +12,8 @@ $(function () {
   });
 });
 
-async function populateTable() {
-  const data = await bikesStolenPastWeek();
+async function populateTable(searchSpec = null) {
+  const data = await bikesStolenPastWeek(searchSpec);
 
   const tableBody = $('#dataTable > tbody');
   tableBody.html(''); // Clear previous data
