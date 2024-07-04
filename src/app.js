@@ -17,13 +17,11 @@ app.get('/api/data', async (req, res) => {
 
     // Send the data obtained from the external API as the response
     res.json(response.data);
-  } catch (error) {
+  } catch (err) {
     // Handle errors
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Failed to fetch data' });
   }
 });
 
 const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.listen(PORT);

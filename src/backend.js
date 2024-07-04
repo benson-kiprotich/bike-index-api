@@ -1,9 +1,8 @@
 export const fetchStolenBikes = async () => {
   try {
-    const url = 'https://bikeindex.org/api/v3/search';
-    const headers = { 'Content-Type': 'application/json' };
+    const url = 'http://localhost:3000/api/data';
 
-    const response = await fetch(url, { headers });
+    const response = await fetch(url);
     const status = response.status;
     const body = await response.json();
 
@@ -34,7 +33,9 @@ export const bikesStolenPastWeek = async (stolenLocation = null) => {
     return (
       stolenDate >= lastWeekDate &&
       stolenDate <= currentDate &&
-      bike['stolen_location'].includes(stolenLocation)
+      bike['stolen_location']
+        .toLocaleLowerCase()
+        .includes(stolenLocation.toLocaleLowerCase())
     );
   });
 

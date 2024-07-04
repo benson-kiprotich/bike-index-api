@@ -1,15 +1,25 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
 
 import { bikesStolenPastWeek } from './backend.js';
 
-async function populateTable() {
-  const data = await bikesStolenPastWeek();
-  var tableBody = document.querySelector('#dataTable tbody');
-  tableBody.empty(); // Clear previous data
+$(function () {
+  $('#searchForm').on('submit', function (event) {
+    event.preventDefault();
+    const searchLocation = $('#searchInput').val();
+    populateTable(searchLocation);
+  });
+});
+
+async function populateTable(searchSpec = null) {
+  const data = await bikesStolenPastWeek(searchSpec);
+
+  const tableBody = $('#dataTable > tbody');
+  tableBody.html(''); // Clear previous data
 
   data.forEach(function (record) {
-    var row = `<tr>
+    let row = `<tr>
                 <td>${record['id']}</td>
                 <td>${record['title']}</td>
                 <td>${record['frame_model']}</td>
